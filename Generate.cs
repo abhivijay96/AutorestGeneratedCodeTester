@@ -1,4 +1,4 @@
-﻿//# Copyright 2016, BSD-style copyright and disclaimer apply
+//# Copyright 2016, BSD-style copyright and disclaimer apply
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,9 +108,16 @@ namespace TestGenerator
                         res = JObject.Parse(res[res.First.Path].ToString());
                         if (res["schema"] != null)
                         {
-                            temp.resDataType = res["schema"].First.ToString();
-                            if (temp.resDataType.Equals("array"))
-                                temp.resArrayType = res["schema"]["items"].First.ToString();
+                            if (res["schema"]["type"] != null)
+                            {
+                                temp.resDataType = res["schema"]["type"].ToString();
+                                if (temp.resDataType.Equals("array"))
+                                    temp.resArrayType = res["schema"]["items"].First.ToString();
+                            }
+                            else
+                            {
+                                temp.resDataType = res["schema"]["$ref"].ToString();
+                            }
                         }
                     }
                     JArray a;
@@ -250,7 +257,7 @@ namespace TestGenerator
             
             temp += "\t\t\t\tvar output = " + "api." + op.operationId + "(" + code + ");\n";
             temp += "\t\t\t\tvar actual = ";
-            if (op.resDataType.Equals("array"))
+            if (op.resDataType.Equals("array") && r.res.body.Length > 0)
             {
                 string[] val = r.res.body.Substring(1, r.res.body.Length - 2).Split(',');
                 temp += "new []{ ";
