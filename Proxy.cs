@@ -11,7 +11,7 @@ namespace TestGenerator
 {
 public class Proxy
 {
-        public static string swagger;
+        public static string swagger,add;
         public static void SimpleListenerExample(string[] prefixes)
         {
             if (!HttpListener.IsSupported)
@@ -26,6 +26,7 @@ public class Proxy
             if (prefixes[1] != null)
             {
                 proxyAddress = prefixes[1];
+                add = proxyAddress;
                 HttpWebRequest t = (HttpWebRequest)WebRequest.Create(proxyAddress + "/swagger/v1/swagger.json");
                 HttpWebResponse r = (HttpWebResponse)t.GetResponse();
                 swagger = new StreamReader(r.GetResponseStream()).ReadToEnd();

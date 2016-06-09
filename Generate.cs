@@ -62,7 +62,7 @@ namespace TestGenerator
             code += "using System;\nusing Xunit;\nnamespace Testing\n{\n\tpublic class ApiTest\n\t{\n";
             
             
-            code += "\t\t\tvar api = new APIV1(new Uri(\"http://localhost:5000/\"));\n\n";
+            code += "\t\t\tvar api = new APIV1(new Uri(\""+Proxy.add+"\"));\n\n";
             while ((line = file.ReadLine()) != null)
             {
                 Gcount++;
