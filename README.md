@@ -4,7 +4,7 @@ It has a proxy which can be accessed at http://localhost:9000/ which records all
 
 The proxy can be accessed using docker as shown below : 
 
-<code>$ docker -e base=http://uri:port/to/service/to/test -p 9000:9000 <your-docker-image></code>
+<code>$ docker -e base=http://uri:port/to/service/to/test -p 9000:9000 your-docker-image</code>
 
 The proxy can also be launched without using docker , by making the following changes in program.cs :
  
