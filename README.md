@@ -6,6 +6,8 @@ The proxy can be accessed using docker as shown below :
 
 <code>$ docker -e base=http://uri:port/to/service/to/test -p 9000:9000 your-docker-image</code>
 
+this will run your docker container and your proxy will be available at port localhost 9000 of the container, and it should forward to http://uri:port/to/service/to/test
+
 The proxy can also be launched without using docker , by making the following changes in program.cs :
  
  Change : <code> string[] arr2 = {"http://localhost:9000/", Environment.GetEnvironmentVariable("base")}; </code>
